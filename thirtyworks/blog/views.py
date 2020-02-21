@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils import timezone
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 # # Create your views here.
@@ -36,39 +38,15 @@ class PostListView(ListView):
     ordering = ['date_posted']  # oldest to newst
     # ordering = ['-date_posted'] # newest to oldest
 
+    # queryset = Post.objects.all()
+    # paginator = Paginator(queryset, paginate_by)
+
+    paginate_by = 10
+
 
 class PostDetailView(DetailView):
     model = Post
 
-# class CreatePostForm(forms.ModelForm):
-#
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#
-#     class Meta:
-#         model = Post
-#         fields = ['title', 'content']
-#
-#     def clean(self):
-#         super().clean()
-#         current_user = self.request.user
-#         if Post.objects.filter(author=current_user, create_date=timezone.now().today()).exists():
-#             # messages.error(self.request, 'You already submitted something today!')
-#             raise forms.ValidationError("You already submitted something today")
-#
-#
-# class PostCreateView(LoginRequiredMixin, CreateView):
-#     model = Post
-#     # fields = ['title', 'content']
-#
-#     def form_valid(self, form):
-#         '''
-#         Assign the currently logged-in user as the author of this post
-#         '''
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-#
-#     form_class = CreatePostForm
 
 class CreatePostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -90,9 +68,8 @@ class CreatePostForm(forms.ModelForm):
             print('User {} was forbidden from posting again today'.format(self.user))
             raise forms.ValidationError("You already submitted something today")
         else:
-            print('This is the first submission1!!!!')
+            print('This is the users first submission ofthe day 1!!!!')
         super().clean()
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

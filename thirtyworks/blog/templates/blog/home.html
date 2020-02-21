@@ -1,16 +1,35 @@
 {% extends "blog/base.html" %}
+
 {% block content %}
-<h1>All Submissions</h1>
-
+  <div class="infinite-container">
     {% for post in posts %}
-
-        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-<!--        <p>By {{ post.author }} on {{ post.date_posted }}</p>-->
-        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">By {{ post.author }} on {{ post.date_posted }}</a>
-        <img class="rounded-circle article-img " src="{{ post.author.userprofile.profilepic.url }}">
-        <p>{{ post.content }}</p>
-
+      <div class="infinite-item">
+        <h3>{{ post.title }}</h3>
+        <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p>
+        <p>{{ post.content|truncatechars:100 }}</p>
+      </div>
     {% endfor %}
-{% endblock content %}
-<!--</body>-->
-<!--</html>-->
+  </div>
+
+  <div class="loading" style="display: none;">
+    Loading...
+  </div>
+
+  {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+  {% endif %}
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+{% endblock %}
