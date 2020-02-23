@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Day
 from django.views.generic import (ListView,
                                   DetailView,
                                   CreateView,
@@ -12,10 +12,7 @@ from django import forms
 from django.utils import timezone
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-
-# # Create your views here.
+from datetime import date
 
 # function-based views
 
@@ -31,7 +28,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/home.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'blog/post_list.html'  # <app>/<model>_<viewtype>.html
     # by default ListView will want to loop over a variable called `object_list`, but we called it `posts`
     # in the dictionary above
     context_object_name = 'posts'
@@ -42,6 +39,14 @@ class PostListView(ListView):
     # paginator = Paginator(queryset, paginate_by)
 
     paginate_by = 10
+    
+
+    def get_queryset(self):
+        day = self.request.GET['day']
+        return Post.objects.filter(day=day)
+        # day = self.request.GET.get('day')
+        # qs = super(MyClassBasedView, self).get_queryset()
+        # return qs.order_by(order_by)
 
 
 class PostDetailView(DetailView):
@@ -55,7 +60,8 @@ class CreatePostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'postpic', 'postvideo', 'day']
+        exclude = ('day',)
 
     def clean(self):
         current_user = self.user  # from init
@@ -63,7 +69,7 @@ class CreatePostForm(forms.ModelForm):
         print('timezone.now().date()='.format(timezone.now().date()))
         print('current_user={}'.format(current_user))
         # print(Post.objects.filter(author=current_user, date_posted=timezone.now().date()))
-        if Post.objects.filter(author=current_user, date_posted__date=timezone.now().date()).exists():
+        if Post.objects.filter(author=current_user, day__date_posted__date=timezone.now().date()).exists():
             # messages.error(current_user, 'You already submitted something today!')
             print('User {} was forbidden from posting again today'.format(self.user))
             raise forms.ValidationError("You already submitted something today")
@@ -88,6 +94,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         Assign the currently logged-in user as the author of this post
         '''
         form.instance.author = self.request.user
+        today = date.today()
+        day = Day.objects.get(date_posted__date=today)
+        form.instance.day = day
         return super().form_valid(form)
 
 
@@ -138,10 +147,8 @@ class UserPostListView(ListView):
 
 
 def about(request):
-    # return HttpResponse()
     return render(request, "blog/about.html", context={'title': 'A nice little title for the about page'})
 
+def home(request):
+    return render(request, "blog/home.html", context={'title': 'A nice aaa title for the about page'})
 
-from django.shortcuts import render
-
-# Create your views here.

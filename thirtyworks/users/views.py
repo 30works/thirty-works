@@ -3,25 +3,31 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import MyUserCreationForm, UserUpdateForm, UserProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from blog.models import Day
 
 
 # Create your views here.
 def register(request):
-    if request.method == 'POST':
-        # form = UserCreationForm(request.POST)
-        form = MyUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, 'Account created for {}'.format(username))
-            # and send the user back to homepage
-            return redirect('blog-home')
-            # and send user to login page
-            # return redirect('login')
+    days = Day.objects.all()
+    if len(days) < 1:
+        if request.method == 'POST':
+            # form = UserCreationForm(request.POST)
+            form = MyUserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, 'Account created for {}'.format(username))
+                # and send the user back to homepage
+                return redirect('blog-home')
+                # and send user to login page
+                # return redirect('login')
+        else:
+            # form = UserCreationForm()
+            form = MyUserCreationForm()
+        return render(request, 'users/register.html', {'form': form})
     else:
-        # form = UserCreationForm()
-        form = MyUserCreationForm()
-    return render(request, 'users/register.html', {'form': form})
+        return redirect('home')
+
 
 @login_required
 def profile(request):
