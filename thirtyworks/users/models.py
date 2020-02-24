@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     '''
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profilepic = models.ImageField(default='default_profilepic.png', upload_to='profile_pics')
+    blocked = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} Profile'.format(self.user.username)
