@@ -150,5 +150,6 @@ def about(request):
     return render(request, "blog/about.html", context={'title': 'A nice little title for the about page'})
 
 def home(request):
-    return render(request, "blog/home.html", context={'title': 'A nice aaa title for the about page'})
+    days = Day.objects.all()
+    return render(request, "blog/home.html", context={'days': days})
 

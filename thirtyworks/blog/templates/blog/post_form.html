@@ -1,6 +1,50 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <div class="content-section">
+<style>
+.hide{
+    display: none;
+}
+label{
+    font-weight: bold;
+}
+</style>
+<div class="content-section mt-5">
+    <div class="text-center">
+    <h2>Submit for Day X (TODO change this hardcoded number)</h2>
+</div>
+    <form method="POST">
+        {% csrf_token %}
+        
+      <div class="alert alert-danger text-center hide">
+
+      </div>
+        <div class="form-group">
+        <label for="email">Title:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter Title" name="title" maxlength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Content:</label>
+        <textarea class="form-control" name="content"  cols="40" rows="10" placeholder="Enter Content" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Post Pic:</label>
+        <input type="file" class="form-control-file" name="postpic" accept="image/*" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Post Video:</label>
+        <input type="url"  class="form-control" id="id_postvideo" placeholder="Enter Video Url" name="postvideo" required >
+      </div>
+      <br>
+      <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;">Submit</button>
+    </div>
+    </form>
+  </div>
+  
+
+
+
+    <div class="content-section" style="display: none;">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -12,4 +56,10 @@
             </div>
         </form>
     </div>
+    <script>
+     if(document.querySelector(".errorlist")){
+          document.querySelector(".alert").classList.remove("hide");
+          document.querySelector(".alert").innerText = document.querySelector(".errorlist").innerText
+     }
+    </script>
 {% endblock content %}

@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load embed_video_tags %}
 
 {% block content %}
   <div class="infinite-container">
@@ -9,7 +10,23 @@
           <small>{{ post.author }} / {{ post.date_posted }}</small>
         </p>
         <p>{{ post.content|truncatechars:100 }}</p>
+        <img src="{{ post.postpic.url }}">
+<!-- The video tag: -->
+{% video post.postvideo as my_video %}
+  URL: {{ my_video.url }}
+  Thumbnail: {{ my_video.thumbnail }}
+  Backend: {{ my_video.backend }}
+
+  {% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
       </div>
+      {% empty %}
+  <div class="text-center">
+    <h2>No Posts Found</h2>
+  </div>
     {% endfor %}
   </div>
 
