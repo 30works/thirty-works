@@ -85,37 +85,177 @@
         <h6>{{ post.content|truncatechars:100 }}</h6><br>
       </div>
 
+      <div class="infinite-item">
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
+{% video post.postvideo as my_video %}
+
+{% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
+      </div>
+      <div class="infinite-item">
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
+{% video post.postvideo as my_video %}
+
+{% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
+      </div>
+      <div class="infinite-item">
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
+{% video post.postvideo as my_video %}
+
+{% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
+      </div>
+      <div class="infinite-item">
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
+{% video post.postvideo as my_video %}
+
+{% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
+      </div>
+      <div class="infinite-item">
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
+{% video post.postvideo as my_video %}
+
+{% video my_video "large" %}
+{% endvideo %}
+
+<!-- Or embed shortcut: -->
+{% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
+      </div>
       {% empty %}
   <div class="text-center">
     <h2>No Posts Found</h2>
   </div>
     {% endfor %}
   </div>
-  {% if posts|length > 1 %}
-  <!-- <a id="button"></a> -->
-
-<div class="text-center">
-<button id="loadMore" class="btn btn-outline-primary btn-lg">Load More Posts <i class="fa fa-angle-double-down"></i></button></div>
-<br> 
-{% endif %}
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
   <script>
+    var count = 0;
+    $(".infinite-item").slice(0, 1).show();
 
-$(function () {
-    $(".infinite-item").slice(0, 3).show();
-    $("#loadMore").on('click', function (e) {
-        e.preventDefault();
-        $(".infinite-item:hidden").slice(0, 3).slideDown();
+function load() {
+        $(".infinite-item:hidden").slice(0, 1).slideDown();
         if ($(".infinite-item:hidden").length == 0) {
-            $("#loadMore").fadeOut('slow');
+            count ++;
         }
-        $('html,body').animate({
-            scrollTop: $(this).offset().top
-        }, 1500);
-    });
+        // $('html,body').animate({
+        //     scrollTop: $(this).offset().top
+        // }, 1500);
+   
+}
+if(count === 0){
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+       $(window).unbind('scroll');
+           load();
+   }
 });
-
+}
     var infinite = new Waypoint.Infinite({
       element: $('.infinite-container')[0],
       onBeforePageLoad: function () {
