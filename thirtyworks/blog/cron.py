@@ -22,6 +22,7 @@ def complain():
     for user in users:
         if user.user.username not in author:
             rejected_users.append(user.user.email)
+            user.user.is_active = False
             user.blocked = True
             user.save()
         else:
@@ -33,7 +34,7 @@ def complain():
     accepted_message = "Your task is to play."
     rejected_subject = "Rejected."
     rejected_message = "You are being blocked to use the system."
-    email(subject, message, rejected_users)
-    email(subject, message, accepted_users)
+    email(rejected_subject, rejected_message, rejected_users)
+    email(accepted_subject, accepted_message, accepted_users)
 
 #  python manage.py installtasks

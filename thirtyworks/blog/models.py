@@ -7,7 +7,6 @@ from embed_video.fields import EmbedVideoField
 class Day(models.Model):
     number = models.IntegerField()
     date_posted = models.DateTimeField(default=timezone.now)
-    suggestion = models.CharField(max_length=200, default="Play with puppy.")
 
     def __str__(self):
         return (str(self.number))

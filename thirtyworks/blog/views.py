@@ -13,6 +13,12 @@ from django.utils import timezone
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import date
+import os
+import json
+from django.db.models import Q
+
+with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
+    config_json = json.load(f)
 
 # function-based views
 
@@ -102,7 +108,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         latest_day = Day.objects.last()
-        context['day'] = latest_day
+        context['day'] = config_json[str(latest_day.number)]
         return context
 
 
@@ -158,4 +164,12 @@ def about(request):
 def home(request):
     days = Day.objects.all()
     return render(request, "blog/home.html", context={'days': days})
+
+def user_detail(request):
+    day = request.POST['day']
+    username = request.POST['username']
+    user = User.objects.get(username=username)
+    day_number = Day.objects.get(number=day)
+    posts = Post.objects.filter(Q(author=user) | Q(day=day_number))
+    return render(request, "blog/user_blogs.html", context={'posts': posts})
 
