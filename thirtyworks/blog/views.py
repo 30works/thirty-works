@@ -99,6 +99,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.day = day
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(PostCreateView, self).get_context_data(**kwargs)
+        latest_day = Day.objects.last()
+        context['day'] = latest_day
+        return context
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post

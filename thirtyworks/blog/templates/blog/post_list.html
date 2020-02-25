@@ -2,43 +2,120 @@
 {% load embed_video_tags %}
 
 {% block content %}
-  <div class="infinite-container">
+<style>
+.infinite-item{
+  display: none;
+}
+/* #button {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styles for the content section */
+
+
+@media (min-width: 500px) {
+  
+  #button {
+    margin: 30px;
+  }
+} */
+</style>  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="infinite-container text-center">
     {% for post in posts %}
       <div class="infinite-item">
-        <h3>{{ post.title }}</h3>
-        <p>
-          <small>{{ post.author }} / {{ post.date_posted }}</small>
-        </p>
-        <p>{{ post.content|truncatechars:100 }}</p>
-        <img src="{{ post.postpic.url }}">
-<!-- The video tag: -->
+        <h2>{{ post.title }}</h2>
+        <br>
+        <!-- The video tag: -->
 {% video post.postvideo as my_video %}
-  URL: {{ my_video.url }}
-  Thumbnail: {{ my_video.thumbnail }}
-  Backend: {{ my_video.backend }}
 
-  {% video my_video "large" %}
+{% video my_video "large" %}
 {% endvideo %}
 
 <!-- Or embed shortcut: -->
 {% video my_video '800x600' %}
+<br><br>
+<h4>MyWork, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <!-- <p>
+          <small>{{ post.author }} / {{ post.date_posted }}</small>
+        </p> -->
+        
+        <img src="{{ post.postpic.url }}" width="960px" height="720px">
+        <br>
+<h4>Untitled, by<a href="">
+   {{ post.author }}
+</a></h4>
+<br>
+        <h6>{{ post.content|truncatechars:100 }}</h6><br>
       </div>
+
       {% empty %}
   <div class="text-center">
     <h2>No Posts Found</h2>
   </div>
     {% endfor %}
   </div>
+  {% if posts|length > 1 %}
+  <!-- <a id="button"></a> -->
 
-  <div class="loading" style="display: none;">
-    Loading...
-  </div>
-
-  {% if page_obj.has_next %}
-    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
-  {% endif %}
+<div class="text-center">
+<button id="loadMore" class="btn btn-outline-primary btn-lg">Load More Posts <i class="fa fa-angle-double-down"></i></button></div>
+<br> 
+{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
   <script>
+
+$(function () {
+    $(".infinite-item").slice(0, 3).show();
+    $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $(".infinite-item:hidden").slice(0, 3).slideDown();
+        if ($(".infinite-item:hidden").length == 0) {
+            $("#loadMore").fadeOut('slow');
+        }
+        $('html,body').animate({
+            scrollTop: $(this).offset().top
+        }, 1500);
+    });
+});
+
     var infinite = new Waypoint.Infinite({
       element: $('.infinite-container')[0],
       onBeforePageLoad: function () {

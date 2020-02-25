@@ -1,18 +1,39 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Login</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <div class="form-group">
-                <button class="'btn btn-outline-info" type="submit">Login</button>
-                <small class="text-muted ml-2">
-                    <a href="{% url 'password_reset' %}">Forgot password?</a>
-                </small>
-            </div>
-        </form>
+<style>
+label{
+    font-weight: bold;
+}
+select{
+    display: none !important ;
+}
+</style>
+<div class="content-section mt-5">
+   
+<form method="POST">
+    {% csrf_token %}
+    <div class="text-center">
+        <h2>Log In</h2>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger text-center" role="alert">
+          {{ form.non_field_errors.0 }}
+        </div>
+        {% endif %}
     </div>
+    <div class="form-group">
+      <label for="email">Username:</label>
+      <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+    </div>
+    <br>
+    <div class="text-center">
+    <button type="submit" class="btn btn-primary btn-lg" style="background-color: #343a40!important;border-color:#343a40!important ;">Login</button>
+    <a href="{% url 'password_reset' %}">Forgot password?</a>
+</div>
+  </form>
+</div>
+    
 {% endblock content %}

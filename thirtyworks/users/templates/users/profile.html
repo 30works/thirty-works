@@ -1,43 +1,67 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<div class="content-section">
-<div class="row">
-<div class="col-md-6">
-    <form>
-        {% csrf_token %}
+<style>
+label{
+  font-weight: bold;
+}
+select{
+  display: none !important;
+}
+</style>
+<div class="content-section mt-5">
 
+    <form  method="POST" enctype="multipart/form-data">
+      <div class="text-center">
+        <h2>Profile Info</h2>
+    </div>
+
+      {% csrf_token %}
+        <div class="row">
+          <div class="col-md-8">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Username</label>
-            <input type="email" class="form-control" name="username" value="{{ user.username|default:'' }}"  placeholder="Enter Username" maxlength="150" required>
+            <label for="exampleFormControlInput1">Username:</label>
+            <input type="text" class="form-control" name="username" value="{{ user.username|default:'' }}"  placeholder="Enter Username" maxlength="150" required>
           </div>
          
           <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
+            <label for="exampleFormControlInput1">Email address:</label>
             <input type="email" class="form-control" name="email" value="{{ user.email|default:'' }}"  placeholder="Enter email"  required>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlFile1">Profile Pic(Currently)</label>
-            <a href="{{user.postpic.url|default:''}}">{{user.postpic.url|default:''}}</a>
+            <label for="exampleFormControlFile1">Profile Pic(Currently):</label>
+            <a href="{{user.userprofile.profilepic.url|default:''}}" id='img' data-name="{{user.userprofile.profilepic.url}}"></a>
         </div>
           <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" >
+            <label for="exampleFormControlFile1">Change:</label>
+            <input type="file" class="form-control-file" name="profilepic" accept="image/*" >
           </div>
+        </div>
+        <div class="col-md-4 text-center">
+          
+            <img class="rounded-circle account-img" src="{{ user.userprofile.profilepic.url }}">
+            
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      
+
+      </div>
+      <br>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;">Update</button>
+
+      </div>
     </form>
-</div>
 
 </div>
-
-<div class="content-section">
+<div class="content-section" style="display: none;">
 <!--        Section to view profile content-->
 
 
         <div class="media">
+          
             <img class="rounded-circle account-img" src="{{ user.userprofile.profilepic.url }}">
-            <div class="media-body">
-                <h2 class="account-heading">{{ user.username }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
-            </div>
+           
         </div>
 <!--        Section to allow user to update info-->
         <form method="POST" enctype="multipart/form-data">
@@ -52,4 +76,11 @@
             </div>
         </form>
     </div>
+    <script>
+    var temp = document.getElementById("img").getAttribute("data-name")
+    if(temp.includes('profile_pics/')){
+        temp = temp.replace('profile_pics/','')
+    }
+    document.getElementById('img').innerText =  temp.replace('/media/','')
+    </script>
 {% endblock content %}

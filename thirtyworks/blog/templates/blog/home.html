@@ -1,4 +1,14 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h2> Home Page </h2>
+    <script>
+        if(sessionStorage.getItem("value")){
+            var name = sessionStorage.getItem("value");
+ window.location.href = "/post/?day="+name;
+        }
+        else{
+            var today = new Date();
+            window.location.href = "/post/?day="+today.getDate();
+        }
+    
+  </script>
 {% endblock content %}

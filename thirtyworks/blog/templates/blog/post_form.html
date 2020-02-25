@@ -7,10 +7,14 @@
 label{
     font-weight: bold;
 }
+select{
+  display: none !important;
+}
 </style>
 <div class="content-section mt-5">
     <div class="text-center">
-    <h2>Submit for Day X (TODO change this hardcoded number)</h2>
+    <h2>Submit for Day <span id="date"></span> (TODO change this hardcoded number)</h2>
+    <h3><strong>Suggestion:</strong> {{day.suggestion}}</h3> 
 </div>
     <form method="POST">
         {% csrf_token %}
@@ -61,5 +65,6 @@ label{
           document.querySelector(".alert").classList.remove("hide");
           document.querySelector(".alert").innerText = document.querySelector(".errorlist").innerText
      }
+     document.getElementById("date").innerText = new Date().getDate();
     </script>
 {% endblock content %}
