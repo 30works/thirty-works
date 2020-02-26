@@ -1,1 +1,218 @@
-{{posts}}
+
+{% load static %}
+{% load embed_video_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    {% if title %}
+        <title>Theblog - {{ title }}</title>
+    {% else %}
+        <title>Theblog </title>
+    {% endif %}
+    <style>
+    .infinite-item{
+  display: none;
+}
+    </style>
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">30 Works</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="/">Home</a>
+<!--              <a class="nav-item nav-link" href="/about">About</a>-->
+                <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <select class="form_control " >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+
+              </select>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
+                    <a class="nav-item nav-link" href="{% url 'post-create' %}">SUBMIT</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                 
+                    {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+<!--    <main role="main" class="row infinite-container">-->
+      <div class="row">
+        <div class="col-md-12">
+            <div class="infinite-container text-center">
+                
+            {% for post in posts %}
+            <div class="infinite-item" data-name="{{post.day.number}}">
+                {% if forloop.first %}
+           <h2 style="text-align: left;">{{post.author}}</h2>
+                {% endif %}
+                <h2>{{ post.title }}</h2>
+              <br>
+              <!-- The video tag: -->
+      {% video post.postvideo as my_video %}
+      
+      {% video my_video "large" %}
+      {% endvideo %}
+      
+      <!-- Or embed shortcut: -->
+      {% video my_video '800x600' %}
+      <br><br>
+      <h4>MyWork, by<a href="" class="name" data-name="{{post.author}}">
+         {{ post.author }}
+      </a></h4>
+      <br>
+              <!-- <p>
+                <small>{{ post.author }} / {{ post.date_posted }}</small>
+              </p> -->
+              
+              <img src="{{ post.postpic.url }}" width="960px" height="720px">
+              <br>
+      <h4>Untitled, by<a href="">
+         {{ post.author }}
+      </a></h4>
+      <br>
+              <h6>{{ post.content|truncatechars:100 }}</h6><br>
+            </div>
+            <div class="infinite-item" data-name="{{post.day.number}}">
+                {% if forloop.first %}
+           <h2 style="text-align: left;">{{post.author}}</h2>
+                {% endif %}
+                <h2>{{ post.title }}</h2>
+              <br>
+              <!-- The video tag: -->
+      {% video post.postvideo as my_video %}
+      
+      {% video my_video "large" %}
+      {% endvideo %}
+      
+      <!-- Or embed shortcut: -->
+      {% video my_video '800x600' %}
+      <br><br>
+      <h4>MyWork, by<a href="" class="name" data-name="{{post.author}}">
+         {{ post.author }}
+      </a></h4>
+      <br>
+              <!-- <p>
+                <small>{{ post.author }} / {{ post.date_posted }}</small>
+              </p> -->
+              
+              <img src="{{ post.postpic.url }}" width="960px" height="720px">
+              <br>
+      <h4>Untitled, by<a href="">
+         {{ post.author }}
+      </a></h4>
+      <br>
+              <h6>{{ post.content|truncatechars:100 }}</h6><br>
+            </div>
+            {% empty %}
+            <div class="text-center">
+              <h2>No Posts Found</h2>
+            </div>
+              {% endfor %}
+            </div> 
+      </div>
+        </div>
+       </main>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+       <script>
+               var count = 0;
+    $(".infinite-item").slice(0, 1).show();
+
+function load() {
+        $(".infinite-item:hidden").slice(0, 1).slideDown();
+        if ($(".infinite-item:hidden").length == 0) {
+            count ++;
+        }
+        // $('html,body').animate({
+        //     scrollTop: $(this).offset().top
+        // }, 1500);
+   
+}
+if(count === 0){
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+       $(window).unbind('scroll');
+           load();
+   }
+});
+}
+
+           if(document.querySelector(".name")){
+           sessionStorage.setItem("name",document.querySelector(".name").getAttribute("data-name"));}
+           if(document.querySelector(".infinite-item")){
+       document.querySelector("select").value = document.querySelector(".infinite-item").getAttribute("data-name")
+       }
+       else{
+        document.querySelector("select").value = sessionStorage.getItem("value2")
+
+       }
+       $('select').on('change', function() {
+      sessionStorage.setItem("value2",this.value);
+      if(document.querySelector(".name")){
+        window.location.href = "/user_detail/?day="+this.value+"&username="+document.querySelector(".name").getAttribute("data-name");
+         return
+             }
+             window.location.href = "/user_detail/?day="+sessionStorage.getItem("value2")+"&username="+sessionStorage.getItem("name");
+
+});
+       </script>
+       </body>
+       </html>
+
+
