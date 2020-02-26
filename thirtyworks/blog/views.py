@@ -166,10 +166,15 @@ def home(request):
     return render(request, "blog/home.html", context={'days': days})
 
 def user_detail(request):
-    day = request.POST['day']
-    username = request.POST['username']
-    user = User.objects.get(username=username)
-    day_number = Day.objects.get(number=day)
-    posts = Post.objects.filter(Q(author=user) | Q(day=day_number))
+    # day = request.POST['day']
+    # username = request.POST['username']
+    day = request.GET['day']
+    username = request.GET['username']
+    try:
+        user = User.objects.get(username=username)
+        day_number = Day.objects.get(number=day)
+        posts = Post.objects.filter(Q(author=user) | Q(day=day_number))
+    except:
+        posts = {}
     return render(request, "blog/user_blogs.html", context={'posts': posts})
 
