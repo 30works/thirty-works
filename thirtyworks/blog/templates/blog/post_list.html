@@ -6,7 +6,35 @@
 .infinite-item{
   display: none;
 }
+iframe, object, embed{
+    max-width: 100%;
+    
+}
+img{
+  height: auto;
+}
+@media screen and (max-width: 768px) {
+    iframe,img {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+}
+@media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 825px) 
+    and (orientation : landscape) 
+ 
+{
+  iframe,img {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+    }
+}
 /* #button {
+
   display: inline-block;
   background-color: #FF9800;
   width: 50px;
@@ -77,7 +105,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -106,7 +134,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -134,7 +162,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -162,7 +190,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -190,7 +218,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -218,7 +246,7 @@
         </p> -->
         
         <img src="{{ post.postpic.url }}" width="960px" height="720px">
-        <br>
+        <br><br>
 <h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
@@ -248,14 +276,23 @@ function load() {
         // }, 1500);
    
 }
-if(count === 0){
-$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-       $(window).unbind('scroll');
+$(document.body).on('touchmove', onScroll); // for mobile
+$(window).on('scroll', onScroll);
+
+var addition_constant = 0;
+
+// callback
+function onScroll(){
+    
+    if(count === 0){
+      var addition = ($(window).scrollTop() + window.innerHeight);
+
+var scrollHeight = (document.body.scrollHeight - 1);
+if (addition > scrollHeight && addition_constant < addition) {      
+   $(window).unbind('scroll');
            load();
    }
-});
+    }
 }
-
   </script>
 {% endblock %}
