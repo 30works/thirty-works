@@ -3,6 +3,7 @@
     <script>
           var temp = "{{days}}"
        sessionStorage.setItem("value",temp)
+       localStorage.setItem("date_value",temp)
             window.location.href = "/post/?day="+temp     
   </script>
 {% endblock content %}

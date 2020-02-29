@@ -65,6 +65,6 @@ select{
           document.querySelector(".alert").classList.remove("hide");
           document.querySelector(".alert").innerText = document.querySelector(".errorlist").innerText
      }
-     document.getElementById("date").innerText = new Date().getDate();
+     document.getElementById("date").innerText = localStorage.getItem("date_value");
     </script>
 {% endblock content %}
