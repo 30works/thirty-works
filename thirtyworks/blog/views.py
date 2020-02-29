@@ -173,7 +173,9 @@ def user_detail(request):
     try:
         user = User.objects.get(username=username)
         day_number = Day.objects.get(number=day)
-        posts = Post.objects.filter(Q(author=user) | Q(day=day_number))
+        # mymodel.objects.filter(first_name__icontains="Foo", first_name__icontains="Bar")
+
+        posts = Post.objects.filter(author=user, day=day_number)
     except:
         posts = {}
     return render(request, "blog/user_blogs.html", context={'posts': posts})

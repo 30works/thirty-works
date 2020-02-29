@@ -100,7 +100,6 @@ img{
                 <option>28</option>
                 <option>29</option>
                 <option>30</option>
-                <option>31</option>
 
               </select>
                 {% if user.is_authenticated %}
@@ -148,44 +147,14 @@ img{
               </p> -->
               
               <img src="{{ post.postpic.url }}" width="960px" height="720px">
-              <br>
+              <br><br>
       <h4>Untitled, by<a href="">
          {{ post.author }}
       </a></h4>
       <br>
               <h6>{{ post.content|truncatechars:100 }}</h6><br>
             </div>
-            <div class="infinite-item" data-name="{{post.day.number}}">
-                {% if forloop.first %}
-           <h2 style="text-align: left;">{{post.author}}</h2>
-                {% endif %}
-                <h2>{{ post.title }}</h2>
-              <br>
-              <!-- The video tag: -->
-      {% video post.postvideo as my_video %}
-      
-      {% video my_video "large" %}
-      {% endvideo %}
-      
-      <!-- Or embed shortcut: -->
-      {% video my_video '800x600' %}
-      <br><br>
-      <h4>MyWork, by<a href="" class="name" data-name="{{post.author}}">
-         {{ post.author }}
-      </a></h4>
-      <br>
-              <!-- <p>
-                <small>{{ post.author }} / {{ post.date_posted }}</small>
-              </p> -->
-              
-              <img src="{{ post.postpic.url }}" width="960px" height="720px">
-              <br>
-      <h4>Untitled, by<a href="">
-         {{ post.author }}
-      </a></h4>
-      <br>
-              <h6>{{ post.content|truncatechars:100 }}</h6><br>
-            </div>
+            
             {% empty %}
             <div class="text-center">
               <h2>No Posts Found</h2>
@@ -237,7 +206,9 @@ if (addition > scrollHeight && addition_constant < addition) {
            if(document.querySelector(".name")){
            sessionStorage.setItem("name",document.querySelector(".name").getAttribute("data-name"));}
            if(document.querySelector(".infinite-item")){
-       document.querySelector("select").value = document.querySelector(".infinite-item").getAttribute("data-name")
+       document.querySelector("select").value = document.querySelectorAll(".infinite-item")[0].getAttribute("data-name")
+     
+       console.log(document.querySelector(".infinite-item").getAttribute("data-name"))
        }
        else{
         document.querySelector("select").value = sessionStorage.getItem("value2")

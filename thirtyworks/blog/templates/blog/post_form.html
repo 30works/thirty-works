@@ -14,7 +14,7 @@ select{
 <div class="content-section mt-5">
     <div class="text-center">
     <h2>Submit for Day <span id="date"></span> (TODO change this hardcoded number)</h2>
-    <h3><strong>Suggestion:</strong> {{day}}</h3> 
+    <h3><strong><i> Suggestion: </i></strong> {{day}}</h3> 
 </div>
     <form method="POST">
         {% csrf_token %}
@@ -28,15 +28,15 @@ select{
       </div>
       <div class="form-group">
         <label for="pwd">Content:</label>
-        <textarea class="form-control" name="content"  cols="40" rows="10" placeholder="Enter Content" required></textarea>
+        <textarea class="form-control" name="content"  cols="40" rows="10" placeholder="Enter Content" ></textarea>
     </div>
     <div class="form-group">
         <label for="exampleFormControlFile1">Post Pic:</label>
-        <input type="file" class="form-control-file" name="postpic" accept="image/*" required>
+        <input type="file" class="form-control-file" name="postpic" accept="image/*" >
       </div>
       <div class="form-group">
         <label for="email">Post Video:</label>
-        <input type="url"  class="form-control" id="id_postvideo" placeholder="Enter Video Url" name="postvideo" required >
+        <input type="url"  class="form-control" id="id_postvideo" placeholder="Enter Video Url" name="postvideo"  >
       </div>
       <br>
       <div class="text-center">

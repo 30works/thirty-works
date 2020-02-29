@@ -20,7 +20,7 @@ def complain():
         authors.append(post.author.username)
     users = UserProfile.objects.all()
     for user in users:
-        if user.user.username not in author:
+        if user.user.username not in author and user.user.is_active:
             rejected_users.append(user.user.email)
             user.user.is_active = False
             user.blocked = True

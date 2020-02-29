@@ -1,14 +1,8 @@
 {% extends "blog/base.html" %}
 {% block content %}
     <script>
-        if(sessionStorage.getItem("value")){
-            var name = sessionStorage.getItem("value");
- window.location.href = "/post/?day="+name;
-        }
-        else{
-            var today = new Date();
-            window.location.href = "/post/?day="+today.getDate();
-        }
-    
+          var temp = "{{days}}"
+       sessionStorage.setItem("value",temp)
+            window.location.href = "/post/?day="+temp     
   </script>
 {% endblock content %}
