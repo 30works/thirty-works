@@ -162,8 +162,8 @@ def about(request):
     return render(request, "blog/about.html", context={'title': 'A nice little title for the about page'})
 
 def home(request):
-    days = Day.objects.all()
-    return render(request, "blog/home.html", context={'days': days})
+    latest_day = Day.objects.last()
+    return render(request, "blog/home.html", context={'days': latest_day.number})
 
 def user_detail(request):
     # day = request.POST['day']
