@@ -85,9 +85,9 @@ img{
 <div class="infinite-container text-center">
     {% for post in posts %}
       <div class="infinite-item">
-        <h2>{{ post.title }}</h2>
         <br>
         <!-- The video tag: -->
+        {% if post.postvideo %}
 {% video post.postvideo as my_video %}
 
 {% video my_video "large" %}
@@ -95,22 +95,17 @@ img{
 
 <!-- Or embed shortcut: -->
 {% video my_video '800x600' %}
+{% elif post.postpic %}
+<img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}'>
+ 
+{% else %}
+<h2>{{ post.content|truncatechars:100 }}</h2>
+{% endif %}
 <br><br>
-<h4>MyWork, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
+<h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
    {{ post.author }}
 </a></h4>
 <br>
-        <!-- <p>
-          <small>{{ post.author }} / {{ post.date_posted }}</small>
-        </p> -->
-        
-        <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}'>
-        <br><br>
-<h4>Untitled, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
-   {{ post.author }}
-</a></h4>
-<br>
-        <h6>{{ post.content|truncatechars:100 }}</h6><br>
       </div>
 
       {% empty %}

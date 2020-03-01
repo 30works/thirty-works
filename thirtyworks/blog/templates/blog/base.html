@@ -34,7 +34,7 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <select class="form_control " >
+              <select class="form_control" id="select" >
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -119,9 +119,10 @@
 <script>
  
 $('select').on('change', function() {
+  if(window.location.pathname != "/post/new/"){
   sessionStorage.setItem("value",this.value);
  window.location.href = "/post/?day="+this.value;
-
+  }
 });
 
 </script>

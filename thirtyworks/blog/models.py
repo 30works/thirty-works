@@ -17,7 +17,7 @@ class Post(models.Model):
     content = models.TextField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
-    postpic = models.ImageField(default='default_profilepic.png', upload_to='post_pics',blank=True, null=True)
+    postpic = models.ImageField( upload_to='post_pics',blank=True, null=True)
     postvideo = EmbedVideoField(blank=True, null=True)
 
 

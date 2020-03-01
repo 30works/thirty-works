@@ -49,7 +49,8 @@ class PostListView(ListView):
 
     def get_queryset(self):
         day = self.request.GET['day']
-        return Post.objects.filter(day=day)
+        day = Day.objects.filter(number=day)
+        return Post.objects.filter(day=day[0])
         # day = self.request.GET.get('day')
         # qs = super(MyClassBasedView, self).get_queryset()
         # return qs.order_by(order_by)
@@ -103,6 +104,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         today = date.today()
         day = Day.objects.get(date_posted__date=today)
         form.instance.day = day
+        print(form)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
