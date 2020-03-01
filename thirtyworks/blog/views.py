@@ -50,7 +50,10 @@ class PostListView(ListView):
     def get_queryset(self):
         day = self.request.GET['day']
         day = Day.objects.filter(number=day)
-        return Post.objects.filter(day=day[0])
+        if day:
+            return Post.objects.filter(day=day[0])
+        else:
+            return Post.objects.filter(day=None)
         # day = self.request.GET.get('day')
         # qs = super(MyClassBasedView, self).get_queryset()
         # return qs.order_by(order_by)
