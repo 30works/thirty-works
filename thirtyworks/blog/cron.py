@@ -9,7 +9,7 @@ def email(subject, message, recipient_list):
     email_from = settings.EMAIL_HOST_USER
     send_mail( subject, message, email_from, recipient_list )
 
-@kronos.register('30 13 * * *')
+@kronos.register('15 15 * * *') # currently set to 3:30 PM for testing
 def complain():
     rejected_users = []
     accepted_users = []
