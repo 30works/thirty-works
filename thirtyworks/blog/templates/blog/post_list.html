@@ -1,5 +1,7 @@
 {% extends "blog/base.html" %}
 {% load embed_video_tags %}
+{% load index %}
+
 
 {% block content %}
 <style>
@@ -88,38 +90,38 @@ img{
         <br>
         <!-- The video tag: -->
         {% if post.postvideo %}
-{% video post.postvideo as my_video %}
+          {% video post.postvideo as my_video %}
+          {% video my_video "large" %}
+        {% endvideo %}
 
-{% video my_video "large" %}
-{% endvideo %}
+      <!-- Or embed shortcut: -->
+      {% video my_video '800x600' %}
+      {% elif post.postpic %}
+      <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
+      
+      {% else %}
+      <h2><a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+      {% endif %}
+      <br><br>
+      <h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
+        {{ post.author }}
+      </a></h4>
+      
+      {% if user|insta:forloop.counter0 %}
+      <h4>
+      <strong>Instagram:</strong> {{ user|insta:forloop.counter0 }}
+      </h4>
+      {% endif %}            
+      {% if user|url:forloop.counter0 %}
+      <h4> <a href="{{user.url}}"  target="_blank">{{ user|url:forloop.counter0 }}</a></h4>
+      {% endif %}
+      <br>
+            </div>
 
-<!-- Or embed shortcut: -->
-{% video my_video '800x600' %}
-{% elif post.postpic %}
-<img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
- 
-{% else %}
-<h2><a href="{{ post.url }}"> {{ post.url }} </a></h2>
-{% endif %}
-<br><br>
-<h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
-   {{ post.author }}
-</a></h4>
-{% if user.insta_handler %}
-<h4>
-<strong>Instagram:</strong> {{user.insta_handler}}
-</h4>
-{% endif %}            
-{% if user.url %}
-<h4> <a href="{{user.url}}">{{user.url}}</a></h4>
-{% endif %}
-<br>
-      </div>
-
-      {% empty %}
-  <div class="text-center">
-    <h2>No Posts Found</h2>
-  </div>
+            {% empty %}
+        <div class="text-center">
+          <h2>No Posts Found</h2>
+        </div>
     {% endfor %}
   </div>
  

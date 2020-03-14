@@ -38,8 +38,8 @@ class PostListView(ListView):
     template_name = 'blog/post_list.html'  # <app>/<model>_<viewtype>.html
     # by default ListView will want to loop over a variable called `object_list`, but we called it `posts`
     # in the dictionary above
-    context_object_name = 'posts'
-    ordering = ['date_posted']  # oldest to newst
+    # context_object_name = 'posts'
+    # ordering = ['date_posted']  # oldest to newst
     # ordering = ['-date_posted'] # newest to oldest
 
     # queryset = Post.objects.all()
@@ -47,17 +47,34 @@ class PostListView(ListView):
 
     paginate_by = 10
     
-
-    def get_queryset(self):
+    def get_context_data(self,**kwargs):
+        users = []
         day = self.request.GET['day']
         day = Day.objects.filter(number=day)
         if day:
-            return Post.objects.filter(day=day[0], is_private=False)
+            posts = Post.objects.filter(day=day[0], is_private=False)
+            for post in posts:
+                users.append(UserProfile.objects.get(user=post.author))
         else:
-            return Post.objects.filter(day=None)
-        # day = self.request.GET.get('day')
-        # qs = super(MyClassBasedView, self).get_queryset()
-        # return qs.order_by(order_by)
+            posts = Post.objects.filter(day=None)
+
+        context = super(PostListView, self).get_context_data(**kwargs)
+        context['posts'] = posts
+        context['user'] = users
+        print(context)
+        return context
+
+
+    # def get_queryset(self):
+    #     day = self.request.GET['day']
+    #     day = Day.objects.filter(number=day)
+    #     if day:
+    #         return Post.objects.filter(day=day[0], is_private=False)
+    #     else:
+    #         return Post.objects.filter(day=None)
+    #     # day = self.request.GET.get('day')
+    #     # qs = super(MyClassBasedView, self).get_queryset()
+    #     # return qs.order_by(order_by)
 
 
 class PostDetailView(DetailView):
