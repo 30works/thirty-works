@@ -29,16 +29,23 @@ label{
       <div class="form-group">
         <label for="exampleFormControlSelect1">Example select</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option>Content</option>
+          <option>Url To My Website</option>
           <option>Picture</option>
           <option>Video</option>
         </select>
       </div>
          <div class="form-group" id="form">
-          <label for="pwd">Content:</label>
-          <textarea class="form-control" name="content"  cols="40" rows="10" placeholder="Enter Content" ></textarea>
+          <label for="pwd">Url To My Website:</label>
+          <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />
          </div>
-      
+         <div class="form-group">
+          <label for="exampleFormControlTextarea1">Alt-text</label>
+          <textarea class="form-control" name="alt_text"  rows="5" placeholder="Enter Alt-text" required></textarea>
+        </div>
+        <div class="custom-control custom-checkbox mr-sm-2">
+          <input type="checkbox" class="custom-control-input" name="is_private" id="customControlAutosizing">
+          <label class="custom-control-label" for="customControlAutosizing">Private Post</label>
+        </div>
       <br>
       <div class="text-center">
       <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;">Submit</button>
@@ -70,19 +77,20 @@ label{
      }
      document.getElementById("date").innerText = localStorage.getItem("date_value");
      $('select').on('change', function() {
-  if(this.value === "Content"){
-    $("#form").html(` <label for="pwd">Content:</label>
-        <textarea class="form-control" name="content"  cols="40" rows="10" placeholder="Enter Content" ></textarea>`)
+       console.log(this.value)
+  if(this.value === "Url To My Website"){
+    $("#form").html(` <label for="pwd">Url To My Website:</label>
+    <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />`)
   }
   else if(this.value === "Picture" ){
     $("#form").html(`        <label for="exampleFormControlFile1">Post Pic:</label>
-        <input type="file" class="form-control-file" name="postpic" accept="image/*"  id="id_postpic">
+        <input type="file" class="form-control-file" name="postpic" accept="image/*"  id="id_postpic" required>
 `)
 
   }
   else{
     $("#form").html(`  <label for="email">Post Video:</label>
-        <input type="url"  class="form-control" id="id_postvideo" placeholder="Enter Video Url" name="postvideo"  >`)
+        <input type="url"  class="form-control" id="id_postvideo" placeholder="Enter Video Url" name="postvideo" required  >`)
   }
 });
 

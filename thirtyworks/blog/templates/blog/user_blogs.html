@@ -109,7 +109,6 @@ img{
                  
                     {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
             </div>
           </div>
@@ -142,13 +141,23 @@ img{
               <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}'>
                
               {% else %}
-              <h2>{{ post.content|truncatechars:100 }}</h2>
+              <h2><a href="{{ post.url }}"> {{ post.url }} </a></h2>
               {% endif %}
               <br><br>
               <h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}" class="name" data-name="{{post.author}}">
                  {{ post.author }}
               </a></h4>
-              <br>
+              {% if user.insta_handler %}
+              <h4>
+          <strong>Instagram:</strong> {{user.insta_handler}}
+              </h4>
+              {% endif %}            
+              {% if user.url %}
+<h4> <a href="{{user.url}}">{{user.url}}</a></h4>
+{% endif %}
+  
+  <br>
+              
             </div>
             
             {% empty %}

@@ -16,6 +16,7 @@ from datetime import date
 import os
 import json
 from django.db.models import Q
+from users.models import UserProfile
 
 with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
     config_json = json.load(f)
@@ -177,11 +178,12 @@ def user_detail(request):
     username = request.GET['username']
     try:
         user = User.objects.get(username=username)
+        user_profile = UserProfile.objects.get(user=user)
         day_number = Day.objects.get(number=day)
         # mymodel.objects.filter(first_name__icontains="Foo", first_name__icontains="Bar")
 
         posts = Post.objects.filter(author=user, day=day_number)
     except:
         posts = {}
-    return render(request, "blog/user_blogs.html", context={'posts': posts})
+    return render(request, "blog/user_blogs.html", context={'posts': posts, 'user': user_profile})
 
