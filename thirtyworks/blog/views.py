@@ -17,6 +17,8 @@ import os
 import json
 from django.db.models import Q
 from users.models import UserProfile
+from django.core.mail import send_mail
+from django.conf import settings
 
 with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
     config_json = json.load(f)
@@ -106,6 +108,7 @@ class CreatePostForm(forms.ModelForm):
         super().clean()
 
 
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     # fields = ['title', 'content']
@@ -125,7 +128,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         today = date.today()
         day = Day.objects.get(date_posted__date=today)
         form.instance.day = day
-        print(form)
+
+        email_from = settings.EMAIL_HOST_USER
+        send_mail("Post Created", "Post has been created.", email_from, [self.request.user.email])
+
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
