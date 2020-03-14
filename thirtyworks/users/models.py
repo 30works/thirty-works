@@ -12,6 +12,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profilepic = models.ImageField(default='default_profilepic.png', upload_to='profile_pics')
     blocked = models.BooleanField(default=False)
+    insta_handler = models.CharField(max_length=100, blank=True, null=True)
+    url = models.CharField(max_length=100, blank=True, null=True)
+
+
 
     def __str__(self):
         return '{} Profile'.format(self.user.username)

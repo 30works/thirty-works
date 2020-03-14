@@ -14,11 +14,13 @@ class Day(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     # for now let's just have text posts
-    content = models.TextField(blank=True, null=True)
+    url = models.CharField(max_length=100, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
     postpic = models.ImageField( upload_to='post_pics',blank=True, null=True)
     postvideo = EmbedVideoField(blank=True, null=True)
+    alt_text = models.CharField(max_length=250, default=None, null=True)
+    is_private = models.BooleanField(default=False)
 
 
     def get_absolute_url(self):

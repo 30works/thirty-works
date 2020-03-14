@@ -51,7 +51,7 @@ class PostListView(ListView):
         day = self.request.GET['day']
         day = Day.objects.filter(number=day)
         if day:
-            return Post.objects.filter(day=day[0])
+            return Post.objects.filter(day=day[0], is_private=False)
         else:
             return Post.objects.filter(day=None)
         # day = self.request.GET.get('day')
@@ -70,7 +70,7 @@ class CreatePostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'content', 'postpic', 'postvideo', 'day']
+        fields = ['title', 'url', 'postpic', 'postvideo', 'day', 'alt_text', 'is_private']
         exclude = ('day',)
 
     def clean(self):
@@ -160,7 +160,7 @@ class UserPostListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return Post.objects.filter(author=user, is_private=False).order_by('-date_posted')
 
 
 def about(request):
