@@ -5,6 +5,7 @@
 
 {% block content %}
 <style>
+
 .infinite-item{
   display: none;
 }
@@ -100,7 +101,7 @@ img{
       <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
       
       {% else %}
-      <h2><a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+      <h2> <a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
       {% endif %}
       <br><br>
       <h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">
