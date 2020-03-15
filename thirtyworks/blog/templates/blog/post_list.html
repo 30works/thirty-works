@@ -108,13 +108,13 @@ img{
         {{ post.author }}
       </a></h4>
       
-      {% if user|insta:forloop.counter0 %}
+      {% if users|insta:forloop.counter0 %}
       <h4>
-      <strong>Instagram:</strong> {{ user|insta:forloop.counter0 }}
+      <strong>Instagram:</strong> {{ users|insta:forloop.counter0 }}
       </h4>
       {% endif %}            
-      {% if user|url:forloop.counter0 %}
-      <h4> <a href="{{user.url}}"  target="_blank">{{ user|url:forloop.counter0 }}</a></h4>
+      {% if users|url:forloop.counter0 %}
+      <h4> <a href="{{user.url}}"  target="_blank">{{ users|url:forloop.counter0 }}</a></h4>
       {% endif %}
       <br>
             </div>

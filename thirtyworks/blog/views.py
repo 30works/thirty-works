@@ -62,7 +62,7 @@ class PostListView(ListView):
 
         context = super(PostListView, self).get_context_data(**kwargs)
         context['posts'] = posts
-        context['user'] = users
+        context['users'] = users
         print(context)
         return context
 
@@ -208,5 +208,5 @@ def user_detail(request):
         posts = Post.objects.filter(author=user, day=day_number)
     except:
         posts = {}
-    return render(request, "blog/user_blogs.html", context={'posts': posts, 'user': user_profile})
+    return render(request, "blog/user_blogs.html", context={'posts': posts, 'users': user_profile})
 
