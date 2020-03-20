@@ -105,6 +105,14 @@ class CreatePostForm(forms.ModelForm):
             raise forms.ValidationError("You already submitted something today")
         else:
             print('This is the users first submission ofthe day 1!!!!')
+
+        current_user_profile = UserProfile.objects.get(user=current_user)
+        if current_user_profile.blocked:
+            print('User us blocked!!!!!!!!!!!!!!!!!!!')
+            raise forms.ValidationError("You are not allowed to submit anymore.")
+
+        else:
+            print('Suer US NOT BLACUKED')
         super().clean()
 
 
@@ -126,7 +134,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         '''
         form.instance.author = self.request.user
         today = date.today()
-        day = Day.objects.get(date_posted__date=today)
+        # day = Day.objects.get(date_posted__date=today)
+        day = Day.objects.last()
         form.instance.day = day
 
         email_from = settings.EMAIL_HOST_USER
