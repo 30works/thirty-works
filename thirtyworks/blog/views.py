@@ -188,7 +188,7 @@ class UserPostListView(ListView):
 
 
 def about(request):
-    return render(request, "blog/about.html", context={'title': 'A nice little title for the about page'})
+    return render(request, "blog/about.html", context={'title': 'About 30Works'})
 
 def home(request):
     latest_day = Day.objects.last()
