@@ -31,7 +31,7 @@ SECRET_KEY = config_json["SECRET_KEY"]
 DEBUG = True
 
 # public IP of server goes here
-ALLOWED_HOSTS = ["139.162.202.182"]
+ALLOWED_HOSTS = ["139.162.202.182", "www.thirty.works", "127.0.0.1"]
 
 
 # Application definition

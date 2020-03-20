@@ -13,8 +13,8 @@ label{
 </style>
 <div class="content-section mt-5">
     <div class="text-center">
-    <h2>Submit for Day <span id="date"></span> (TODO change this hardcoded number)</h2>
-    <h3><strong><i> Suggestion: </i></strong> {{day}}</h3> 
+    <h2>Submit for Day <span id="date"></span></h2>
+    <h3><strong><i> Brief: </i></strong> {{day}}</h3>
 </div>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -27,15 +27,15 @@ label{
         <input type="text" class="form-control" id="email" placeholder="Enter Title" name="title" maxlength="100" required>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
+        <label for="exampleFormControlSelect1">Submission Format</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option>Url To My Website</option>
-          <option>Picture</option>
-          <option>Video</option>
+          <option>Webpage URL</option>
+          <option>Upload JPEG / PNG</option>
+          <option>Vimeo / Youtube / Soundcloud URL</option>
         </select>
       </div>
          <div class="form-group" id="form">
-          <label for="pwd">Url To My Website:</label>
+          <label for="pwd">Webpage URL:</label>
           <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />
          </div>
          <div class="form-group">
@@ -44,7 +44,7 @@ label{
         </div>
         <div class="custom-control custom-checkbox mr-sm-2">
           <input type="checkbox" class="custom-control-input" name="is_private" id="customControlAutosizing">
-          <label class="custom-control-label" for="customControlAutosizing">Private Post</label>
+          <label class="custom-control-label" for="customControlAutosizing">Tick this box if you don’t want this work to be made public.</label>
         </div>
       <br>
       <div class="text-center">
@@ -60,7 +60,7 @@ label{
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Submit for Day X (TODO change this hardcoded number)</legend>
+                <legend class="border-bottom mb-4">Submit for Day</legend>
                 {{ form.as_p }}
             </fieldset>
             <div class="form-group">
