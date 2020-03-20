@@ -77,7 +77,7 @@ def complain():
 
     # accepted_subject = "Accepted."
     accepted_subject = "30/30 Day {}".format(day_number)
-    accepted_message = "".format(DAILY_BRIEF_EMAIL)
+    accepted_message = "{}".format(DAILY_BRIEF_EMAIL)
     accepted_message = accepted_message.format(day_number, day_number)
 
     # rejected_subject = "Rejected."
