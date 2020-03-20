@@ -78,11 +78,11 @@ label{
      document.getElementById("date").innerText = localStorage.getItem("date_value");
      $('select').on('change', function() {
        console.log(this.value)
-  if(this.value === "Url To My Website"){
-    $("#form").html(` <label for="pwd">Url To My Website:</label>
+  if(this.value === "Webpage URL"){
+    $("#form").html(` <label for="pwd">Webpage URL:</label>
     <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />`)
   }
-  else if(this.value === "Picture" ){
+  else if(this.value === "Upload JPEG / PNG" ){
     $("#form").html(`        <label for="exampleFormControlFile1">Post Pic:</label>
         <input type="file" class="form-control-file" name="postpic" accept="image/*"  id="id_postpic" required>
 `)
