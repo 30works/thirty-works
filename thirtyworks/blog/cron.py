@@ -15,7 +15,7 @@ DAILY_BRIEF_EMAIL = """
 
 day {} brief
 
-deadline: 23:59 * today ({}th)
+deadline: 23:59 * today (2020-04-{:02d})
 
 brief :  {}
 
@@ -36,7 +36,7 @@ we're sad to see you go !
 
 We didn't get your work in time for the deadline yesterday, this means that unfortunately you are no longer able to participate in the project.
 
-Check out thirty.works and our instagram, twitter and facebook for a selection of works submitted each day!
+Check out thirty.works and our instagram for a selection of works submitted each day!
 
 We hope to see you participate in other future projects - sign up to be on our mailing list through our website and keep in touch!
 
@@ -59,6 +59,7 @@ def complain():
     authors_who_submitted_today = []
     for post in posts:
         authors_who_submitted_today.append(post.author.username)
+        print(post.title)
     users = UserProfile.objects.all()
     print(authors_who_submitted_today)
     for user in users:
@@ -78,13 +79,13 @@ def complain():
     # accepted_subject = "Accepted."
     accepted_subject = "30/30 Day {}".format(day_number)
     accepted_message = "{}".format(DAILY_BRIEF_EMAIL)
-    accepted_message = accepted_message.format(day_number, day_number)
+    brief = config_json[str(latest_day.number)]
+    accepted_message = accepted_message.format(day_number, day_number, brief)
 
     # rejected_subject = "Rejected."
     rejected_subject = "30/30 - oh noo, our commiserations"
     # rejected_message = "You are being blocked to use the system."
     rejected_message = "{}".format(COMMISERATIONS_EMAIL)
-    brief = config_json[str(latest_day.number)]
     rejected_message = rejected_message.format(brief)
 
     # debugging
