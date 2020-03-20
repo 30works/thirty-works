@@ -31,7 +31,7 @@ SECRET_KEY = config_json["SECRET_KEY"]
 DEBUG = True
 
 # public IP of server goes here
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["139.162.202.182"]
 
 
 # Application definition
@@ -151,4 +151,3 @@ EMAIL_HOST_PASSWORD = config_json["EMAIL_HOST_PASSWORD"]
 
 # 30 works logic stuff
 NUM_DAYS = 30
-

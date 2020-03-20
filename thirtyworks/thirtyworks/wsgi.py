@@ -8,6 +8,13 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+# add the thirtyworks project path into the sys.path
+sys.path.append('/home/ubuntu/thirty-works/thirtyworks')
+
+# add the virtualenv site-packages path to the sys.path
+sys.path.append('/home/ubuntu/virtualenvs/30env/lib/python3.6/site-packages')
 
 from django.core.wsgi import get_wsgi_application
 
