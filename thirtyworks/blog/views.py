@@ -139,7 +139,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.day = day
 
         email_from = settings.EMAIL_HOST_USER
-        send_mail("Post Created", "Post has been created.", email_from, [self.request.user.email])
+        send_mail("Thanks for submitting for day {}".format(day.number), "Your work has been received!", email_from, [self.request.user.email])
 
         return super().form_valid(form)
 
