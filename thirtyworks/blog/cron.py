@@ -19,7 +19,7 @@ deadline: 23:59 * today (2020-04-{:02d})
 
 brief :  {}
 
-Submit your work today through the thirty.works portal  link here   (submit button is in the top right corner) 
+Submit your work today through the thirty.works portal  https://www.thirty.works/post/new/   (submit button is in the top right corner) 
 
 *this is london, UK time (GMT+1:00 or BST)
 
