@@ -90,7 +90,7 @@ class CreatePostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'url', 'postpic', 'postvideo', 'day', 'alt_text', 'is_private']
+        fields = ['title', 'url', 'postpic', 'postvideo', 'day', 'alt_text', 'is_private', 'anything_else']
         exclude = ('day',)
 
     def clean(self):
@@ -109,10 +109,9 @@ class CreatePostForm(forms.ModelForm):
         current_user_profile = UserProfile.objects.get(user=current_user)
         if current_user_profile.blocked:
             print('User us blocked!!!!!!!!!!!!!!!!!!!')
-            raise forms.ValidationError("You are not allowed to submit anymore.")
-
+            raise forms.ValidationError("Sorry, you are not allowed to submit anymore.")
         else:
-            print('Suer US NOT BLACUKED')
+            print('USer is not blocked')
         super().clean()
 
 

@@ -21,7 +21,7 @@ class Post(models.Model):
     postvideo = EmbedVideoField(blank=True, null=True)
     alt_text = models.CharField(max_length=250, default=None, null=True)
     is_private = models.BooleanField(default=False)
-
+    anything_else = models.CharField(max_length=250, default=None, null=True)
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk':self.pk})
