@@ -5,7 +5,7 @@ from django.urls import reverse
 from embed_video.fields import EmbedVideoField
 
 class Day(models.Model):
-    number = models.IntegerField()
+    number = models.IntegerField(verbose_name="Day Number")
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -25,3 +25,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk':self.pk})
+    
+    def __str__(self):
+        return ("Post " + str(self.id) + " " + str(self.title))
