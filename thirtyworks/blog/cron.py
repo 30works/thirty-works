@@ -50,7 +50,8 @@ def email(subject, message, recipient_list):
     email_from = settings.EMAIL_HOST_USER
     send_mail( subject, message, email_from, recipient_list )
 
-@kronos.register('15 15 * * *') # currently set to 3:30 PM for testing
+# @kronos.register('15 15 * * *') # set to 3:15 PM for testing
+@kronos.register('5 0 * * *') # set to 5 past midnight
 def complain():
     rejected_users = []
     accepted_users = []
@@ -96,10 +97,18 @@ def complain():
     print('reject message: ')
     print(rejected_message)
 
-    email(rejected_subject, rejected_message, rejected_users)
-    print("Email has been sent to rejected users.")
-    email(accepted_subject, accepted_message, accepted_users)
-    print("Email has been sent to active users.")
+    # email(rejected_subject, rejected_message, rejected_users)
+    # print("Email has been sent to rejected users.")
+    # email(accepted_subject, accepted_message, accepted_users)
+    # print("Email has been sent to active users.")
+
+    # send email to rejected users
+    for rejected_user in rejected_users:
+        email(rejected_subject, rejected_message, [rejected_user])
+
+    # send email to active users
+    for accepted_user in accepted_users:
+        email(accepted_subject, accepted_message, [accepted_user])
 
 # python manage.py installtasks
 # python manage.py showtasks
