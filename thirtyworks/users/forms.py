@@ -27,4 +27,4 @@ class UserUpdateForm(forms.ModelForm):
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['profilepic']
+        fields = ['profilepic', 'insta_handler', 'url']
