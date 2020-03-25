@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'kronos',
-    'embed_video'
+    'embed_video',
+    'django_admin_listfilter_dropdown'
 ]
 
 MIDDLEWARE = [
