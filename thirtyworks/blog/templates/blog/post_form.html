@@ -15,6 +15,7 @@ label{
     <div class="text-center">
     <h2>Submit for Day <span id="date"></span></h2>
     <h3><strong><i> Brief: </i></strong> {{day}}</h3>
+        <h4>Fields marked with a (*) are required</h4>
 </div>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -23,11 +24,11 @@ label{
 
       </div>
         <div class="form-group">
-        <label for="email">Title:</label>
+        <label for="email">Title (*)</label>
         <input type="text" class="form-control" id="email" placeholder="Enter Title" name="title" maxlength="100" required>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Submission Format</label>
+        <label for="exampleFormControlSelect1">Submission Format (*)</label>
         <select class="form-control" id="exampleFormControlSelect1">
           <option value="1">Webpage URL</option>
           <option value="2">Upload JPEG / PNG</option>
@@ -35,11 +36,11 @@ label{
         </select>
       </div>
          <div class="form-group" id="form">
-          <label for="pwd">Webpage URL:</label>
+          <label for="pwd">Webpage URL (*)</label>
           <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />
          </div>
          <div class="form-group">
-          <label for="exampleFormControlTextarea1">Alt-text</label>
+          <label for="exampleFormControlTextarea1">Alt-text (*)</label>
           <textarea class="form-control" name="alt_text"  rows="5" placeholder="Enter Alt-text" required></textarea>
         </div>
         <div class="form-group">
