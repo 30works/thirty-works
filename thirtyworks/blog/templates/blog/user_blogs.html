@@ -148,7 +148,13 @@ img{
               <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}'alt="{{post.alt_text}}">
                
               {% else %}
-              <h2><a href="{{ post.url }}" target="_blank"> {{ post.url }} </a></h2>
+              
+
+              {% if post.url|slice:":4" == 'http' %}
+              <h2> <a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+           {% else %}
+           <h2> <a href="//{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+           {% endif %}            
               {% endif %}
               <br><br>
               <h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}" class="name" data-name="{{post.author}}">
@@ -160,9 +166,15 @@ img{
               </h4>
               {% endif %}            
               {% if users.url %}
+              {% if users.url|slice:":4" == 'http' %}
+
 <h4> <a href="{{users.url}}" target="_blank">{{users.url}}</a></h4>
+{% else %}
+<h4> <a href="//{{users.url}}" target="_blank">{{users.url}}</a></h4>
+
 {% endif %}
-  
+
+{% endif %}  
   <br>
               
             </div>
