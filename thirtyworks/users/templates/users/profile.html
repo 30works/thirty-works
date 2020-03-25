@@ -27,6 +27,17 @@ select{
             <label for="exampleFormControlInput1">Email address:</label>
             <input type="email" class="form-control" name="email" value="{{ user.email|default:'' }}"  placeholder="Enter email"  required>
           </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Instagram:</label>
+            <input type="text" class="form-control" name="insta_handler" value="{{ user.userprofile.insta_handler|default:'' }}"  placeholder="Enter instgram handle">
+          </div>
+
+            <div class="form-group">
+            <label for="exampleFormControlInput1">Website:</label>
+            <input type="text" class="form-control" name="url" value="{{ user.userprofile.url|default:'' }}"  placeholder="Enter website">
+          </div>
+
           <div class="form-group">
             <label for="exampleFormControlFile1">Profile Pic(Currently):</label>
             <a href="{{user.userprofile.profilepic.url|default:''}}" id='img' data-name="{{user.userprofile.profilepic.url}}"></a>
