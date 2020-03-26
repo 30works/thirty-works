@@ -13,7 +13,8 @@ class Day(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    # for now let's just have text posts
+    datetime_posted = models.DateTimeField(default=timezone.now)
+
     url = models.CharField(max_length=250, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
