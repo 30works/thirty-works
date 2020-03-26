@@ -1,15 +1,65 @@
 {% extends "blog/base.html" %}
+{% load embed_video_tags %}
+{% load index %}
+
 {% block content %}
 
-    <h2>{{ object.title }}</h2>
-    <p>By {{ post.author }} on {{ object.date_posted }}</p>
-    <img class="rounded-circle article-img " src="{{ object.author.userprofile.profilepic.url }}">
-    <p>{{ object.content }}</p>
+    <h2>Submission preview</h2>
+<!--    <p>By {{ post.author }} on {{ object.date_posted }}</p>-->
+<!--    <img class="rounded-circle article-img " src="{{ object.author.userprofile.profilepic.url }}">-->
+
+      <div class="infinite-item" aria-labelledby="{{post.alt_text}}">
+        <br>
+        <!-- The video tag: -->
+        {% if post.postvideo %}
+          {% video post.postvideo as my_video %}
+          {% video my_video "large" %}
+        {% endvideo %}
+
+      <!-- Or embed shortcut: -->
+      {% video my_video '800x600' %}
+      {% elif post.postpic %}
+<!--      <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">-->
+      <img src="{{ post.postpic.url }}" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
+
+      {% else %}
+      {% if post.url|slice:":4" == 'http' %}
+      <h2> <a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+   {% else %}
+   <h2> <a href="//{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+   {% endif %}
+      {% endif %}
+      <br><br>
+<!--      <h4>{{post.title}}, by<a href="/user_detail/?day={{post.day.number}}&username={{post.author}}">-->
+      </a></h4>
+
+      {% if users|insta:forloop.counter0 %}
+      <h4>
+      <strong>Instagram:</strong> {{ users|insta:forloop.counter0 }}
+      </h4>
+      {% endif %}
+      {% if users|url:forloop.counter0 %}
+      {% if users|url:forloop.counter0|slice:":4" == 'http' %}
+
+      <h4> <a href="{{ users|url:forloop.counter0 }}"  target="_blank">{{ users|url:forloop.counter0 }}</a></h4>
+      {% else %}
+      <h4> <a href="//{{ users|url:forloop.counter0 }}" target="_blank">{{users.url}}</a></h4>
+      {% endif %}
+
+      {% endif %}
+      <br>
+            </div>
+
+        <div class="text-center">
+          <h2> </h2>
+        </div>
+
 
     <div>
         {% if object.author == user %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Edit</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">DELETE</a>
+            <a class="btn btn-success btn-sm mt-1 mb-1" href="{% url 'home' %}">Continue</a>
 
         {% endif %}
     </div>
