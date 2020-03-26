@@ -54,11 +54,11 @@ class PostListView(ListView):
         day = self.request.GET['day']
         day = Day.objects.filter(number=day)
         if day:
-            posts = Post.objects.filter(day=day[0], is_private=False)
+            posts = Post.objects.filter(day=day[0], is_private=False).order_by('-datetime_posted')
             for post in posts:
                 users.append(UserProfile.objects.get(user=post.author))
         else:
-            posts = Post.objects.filter(day=None)
+            posts = Post.objects.filter(day=None).order_by('-datetime_posted')
 
         context = super(PostListView, self).get_context_data(**kwargs)
         context['posts'] = posts
@@ -113,7 +113,6 @@ class CreatePostForm(forms.ModelForm):
         else:
             print('USer is not blocked')
         super().clean()
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -192,7 +191,7 @@ class UserPostListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user, is_private=False).order_by('date_posted')
+        return Post.objects.filter(author=user, is_private=False).order_by('-date_posted')
 
 
 def about(request):
