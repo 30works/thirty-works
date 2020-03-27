@@ -122,7 +122,7 @@ img{
 
       <h4> <a href="{{ users|url:forloop.counter0 }}"  target="_blank">{{ users|url:forloop.counter0 }}</a></h4>
       {% else %}
-      <h4> <a href="//{{ users|url:forloop.counter0 }}" target="_blank">{{users.url}}</a></h4>
+      <h4> <a href="//{{ users|url:forloop.counter0 }}" target="_blank">{{ users|url:forloop.counter0 }}</a></h4>
       {% endif %}
       
       {% endif %}
