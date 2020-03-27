@@ -3,6 +3,29 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from embed_video.fields import EmbedVideoField
+import copy
+from PIL import Image
+
+
+def resize_to_maxsize(max_size, pil_image):
+    width, height = pil_image.size
+
+    # if the image exceeds maximum size
+    if height > max_size or width > max_size:
+
+        new_width, new_height = copy.deepcopy(width), copy.deepcopy(height)
+
+        # if portrait
+        if height > width:
+            new_width = max_size * (width / float(height))
+        # if landscape
+        else:
+            new_height = max_size * (height / float(width))
+
+        pil_image.thumbnail((new_width, new_height), Image.ANTIALIAS)
+
+    return pil_image
+
 
 class Day(models.Model):
     number = models.IntegerField(verbose_name="Day Number")
@@ -29,3 +52,25 @@ class Post(models.Model):
     
     def __str__(self):
         return ("Post " + str(self.id) + " " + str(self.title))
+
+    def save(self, *args, **kwargs):
+        '''
+        Overriding default save to implement image downsampling for disk space saving
+        '''
+        super().save(*args, **kwargs)
+
+
+        # set maximum allowed image size
+        MAX_SIZE = 900
+
+        # if the post is a picture upload
+        if self.postpic:
+
+            # open the image
+            im = Image.open(self.postpic.path)
+
+            # resize if necessary
+            im = resize_to_maxsize(MAX_SIZE, im)
+
+            # save the image file
+            im.save(self.postpic.path)
