@@ -55,6 +55,44 @@
           <h2> </h2>
         </div>
 
+    <div>
+        {% if object.author == user %}
+
+        {% if object.postpic %}
+
+<!--        <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-detail' object.id %}">Rotate Left</a>-->
+<!--        <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-detail' object.id %}">Rotate Roght</a>-->
+
+        <form class='Rotate-Form' method='post'>
+            {% csrf_token %}
+            <input name="rotate-left" hidden>
+            <input name="pk" value="{{ object.pk }}" hidden>
+            <button type="submit" class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-detail' object.id %}">Rotate Left</button>
+        </form>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+    <div>
+        {% if object.author == user %}
+
+        {% if object.postpic %}
+
+        <form class='Rotate-Form' method='post'>
+            {% csrf_token %}
+            <input name="rotate-right" hidden>
+            <input name="pk" value="{{ object.pk }}" hidden>
+            <button type="submit" class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-detail' object.id %}">Rotate Right</button>
+        </form>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
 
     <div>
         {% if object.author == user %}
