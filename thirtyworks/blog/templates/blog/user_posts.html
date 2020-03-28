@@ -4,7 +4,88 @@
 
 
 {% block content %}
+<style>
 
+.infinite-item{
+  display: none;
+}
+iframe, object, embed{
+    max-width: 100%;
+
+}
+img{
+  height: auto;
+}
+@media screen and (max-width: 768px) {
+    iframe,img {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+}
+@media only screen
+    and (min-device-width : 375px)
+    and (max-device-width : 825px)
+    and (orientation : landscape)
+
+{
+  iframe,img {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+    }
+}
+/* #button {
+
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s,
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styles for the content section */
+
+
+@media (min-width: 500px) {
+
+  #button {
+    margin: 30px;
+  }
+} */
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="infinite-container text-center">
 <h1 class="mb-3">{{ view.kwargs.username }}'s Works</h1>
 
     {% for post in posts %}
@@ -41,6 +122,50 @@
 
 
     {% endfor %}
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script>
+
+    if(document.querySelector('img')){
+        document.querySelector("select").value = document.querySelector('img').getAttribute("data-name")
+    }
+    else{
+      document.querySelector("select").value = sessionStorage.getItem("value")
+    }
+    var count = 0;
+    $(".infinite-item").slice(0, 2).show();
+
+function load() {
+        $(".infinite-item:hidden").slice(0, 1).slideDown();
+        if ($(".infinite-item:hidden").length == 0) {
+            count ++;
+        }
+        // $('html,body').animate({
+        //     scrollTop: $(this).offset().top
+        // }, 1500);
+
+}
+$(document.body).on('touchmove', onScroll); // for mobile
+$(window).on('scroll', onScroll);
+
+var addition_constant = 0;
+
+// callback
+function onScroll(){
+
+    if(count === 0){
+      var addition = ($(window).scrollTop() + window.innerHeight);
+
+var scrollHeight = (document.body.scrollHeight - 1);
+if (addition > scrollHeight && addition_constant < addition) {
+   $(window).unbind('scroll');
+           load();
+   }
+    }
+}
+  </script>
+
 {% endblock content %}
 <!--</body>-->
 <!--</html>-->
