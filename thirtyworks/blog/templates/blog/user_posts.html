@@ -1,13 +1,44 @@
 {% extends "blog/base.html" %}
+{% load embed_video_tags %}
+{% load index %}
+
+
 {% block content %}
-<h1 class="mb-3">{{ view.kwargs.username }}'s Posts</h1>
+
+<h1 class="mb-3">{{ view.kwargs.username }}'s Works</h1>
 
     {% for post in posts %}
 
-        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">By {{ post.author }} on {{ post.date_posted }}</a>
-        <img class="rounded-circle article-img " src="{{ post.author.userprofile.profilepic.url }}">
-        <p>{{ post.content }}</p>
+<!--        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>-->
+<!--        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">By {{ post.author }} on {{ post.datetime_posted }}</a>-->
+<!--        <img class="rounded-circle article-img " src="{{ post.author.userprofile.profilepic.url }}">-->
+<!--        <p>{{ post.content }}</p>-->
+
+
+<div class="infinite-item" aria-labelledby="{{post.alt_text}}">
+        <br>
+        <!-- The video tag: -->
+        {% if post.postvideo %}
+          {% video post.postvideo as my_video %}
+          {% video my_video "large" %}
+        {% endvideo %}
+
+      <!-- Or embed shortcut: -->
+      {% video my_video '800x600' %}
+      {% elif post.postpic %}
+<!--      <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">-->
+      <img src="{{ post.postpic.url }}" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
+
+      {% else %}
+      {% if post.url|slice:":4" == 'http' %}
+      <h1> <a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h1>
+   {% else %}
+   <h1> <a href="//{{ post.url }}"  target="_blank"> {{ post.url }} </a></h1>
+   {% endif %}
+      {% endif %}
+      <br><br>
+      <h4>{{post.title}}</h4>
+
 
     {% endfor %}
 {% endblock content %}

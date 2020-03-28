@@ -224,13 +224,13 @@ class UserPostListView(ListView):
     # by default ListView will want to loop over a variable called `object_list`, but we called it `posts`
     # in the dictionary above
     context_object_name = 'posts'
-    ordering = ['date_posted']  # oldest to newst
+    ordering = ['datetime_posted']  # oldest to newst
 
     # ordering = ['-date_posted'] # newest to oldest
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user, is_private=False).order_by('-date_posted')
+        return Post.objects.filter(author=user, is_private=False).order_by('datetime_posted')
 
 
 def about(request):
