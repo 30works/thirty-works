@@ -20,7 +20,7 @@
       {% video my_video '800x600' %}
       {% elif post.postpic %}
 <!--      <img src="{{ post.postpic.url }}" width="960px" height="720px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">-->
-      <img src="{{ post.postpic.url }}" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
+      <img src="{{ post.postpic.url }}" width="500px" data-name='{{post.day.number}}' alt="{{post.alt_text}}">
 
       {% else %}
       {% if post.url|slice:":4" == 'http' %}
