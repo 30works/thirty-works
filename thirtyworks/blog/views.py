@@ -19,6 +19,9 @@ from django.db.models import Q
 from users.models import UserProfile
 from django.core.mail import send_mail
 from django.conf import settings
+from django.shortcuts import render, redirect
+from PIL import Image
+
 
 with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
     config_json = json.load(f)
@@ -81,6 +84,42 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get("pk")
+        # product = Product.objects.get(pk=pk)
+        thepost = Post.objects.get(pk=name)
+
+        if "rotate-left" in request.POST:
+
+            # if the post is a picture upload
+            if thepost.postpic:
+                print('gunna rotate the post left ' + thepost.title)
+                # open the image
+                im = Image.open(thepost.postpic.path)
+
+                im = im.rotate(90)
+
+                # save the image file
+                im.save(thepost.postpic.path)
+                print('SAVED THE IMAGEEEE')
+
+        if "rotate-right" in request.POST:
+
+            # if the post is a picture upload
+            if thepost.postpic:
+                print('gunna rotate the post right ' + thepost.title)
+                # open the image
+                im = Image.open(thepost.postpic.path)
+
+                im = im.rotate(-90)
+
+                # save the image file
+                im.save(thepost.postpic.path)
+                print('SAVED THE IMAGEEEE')
+
+
+        return redirect('post-detail', pk=thepost.id)
 
 
 class CreatePostForm(forms.ModelForm):
