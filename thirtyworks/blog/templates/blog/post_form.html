@@ -53,7 +53,7 @@ label{
         </div>
       <br>
       <div class="text-center">
-      <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;">Submit</button>
+      <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;" id="submitbutton1">Submit</button>
     </div>
     </form>
   </div>
@@ -61,18 +61,18 @@ label{
 
 
 
-    <div class="content-section" style="display: none;">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Submit for Day</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <div class="form-group">
-                <button class="'btn btn-outline-info" type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
+<!--    <div class="content-section" style="display: none;">-->
+<!--        <form method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            <fieldset class="form-group">-->
+<!--                <legend class="border-bottom mb-4">Submit for Day</legend>-->
+<!--                {{ form.as_p }}-->
+<!--            </fieldset>-->
+<!--            <div class="form-group">-->
+<!--                <button class="'btn btn-outline-info" type="submit" id="submitbutton2">Submit</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    
     <script>
@@ -100,4 +100,14 @@ label{
 });
 
     </script>
+
+<script>
+
+$("#submitbutton1").on("click", function() {
+    $(this).prop("disabled", true);
+    this.form.submit();
+});
+
+</script>
+
 {% endblock content %}
