@@ -98,7 +98,7 @@ class PostDetailView(DetailView):
                 # open the image
                 im = Image.open(thepost.postpic.path)
 
-                im = im.rotate(90)
+                im = im.rotate(90, expand=True)
 
                 # save the image file
                 im.save(thepost.postpic.path)
@@ -112,7 +112,7 @@ class PostDetailView(DetailView):
                 # open the image
                 im = Image.open(thepost.postpic.path)
 
-                im = im.rotate(-90)
+                im = im.rotate(-90, expand=True)
 
                 # save the image file
                 im.save(thepost.postpic.path)
