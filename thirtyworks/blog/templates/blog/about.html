@@ -1,4 +1,6 @@
 {% extends "blog/base.html" %}
+{% load static %}
+
 {% block content %}
 <h1>30works30days</h1>
     <p>
@@ -22,6 +24,11 @@
     All rights reserved and affiliated companies or are included with permission of the relevant owner
     <i>including any future rights associated with such submissions, even if these terms and conditions are later modified or terminated.</i>
 </small>
+
+<div>
+    <img src="{% static '12o-logo.png' %}" alt="12o logo" height="90px" > <img src="{% static 'Artquest-logo-2.png' %}" alt="12o logo" height="75px" >
+</div>
+
 {% endblock content %}
 
 <!--<!DOCTYPE html>-->
