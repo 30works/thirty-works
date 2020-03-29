@@ -80,7 +80,7 @@ def complain():
     # accepted_subject = "Accepted."
     accepted_subject = "30/30 Day {}".format(day_number)
     accepted_message = "{}".format(DAILY_BRIEF_EMAIL)
-    brief = config_json[str(latest_day.number)]
+    brief = config_json[str(day_number)]
     accepted_message = accepted_message.format(day_number, day_number, brief)
 
     # rejected_subject = "Rejected."

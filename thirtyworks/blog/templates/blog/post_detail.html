@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<div class="wrapper">
+
     <h2>Submission preview</h2>
 <!--    <p>By {{ post.author }} on {{ object.date_posted }}</p>-->
 <!--    <img class="rounded-circle article-img " src="{{ object.author.userprofile.profilepic.url }}">-->
@@ -102,6 +104,20 @@
 
         {% endif %}
     </div>
+
+</div>
+
+<style>
+        .wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+</style>
+
 
 {% endblock content %}
 <!--</body>-->

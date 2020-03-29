@@ -94,4 +94,20 @@ select{
     }
     document.getElementById('img').innerText =  temp.replace('/media/','')
     </script>
+
+    <div class="wrapper">
+    <form>
+        <button type="submit" class="btn btn-secondary btn-lg" formaction="{% url 'password_reset' %}">Change Password</button>
+    </form>
+    </div>
+<style>
+    .wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+</style>
 {% endblock content %}
