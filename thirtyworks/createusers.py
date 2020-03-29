@@ -11,7 +11,7 @@ import os
 from django.db.utils import IntegrityError
 
 
-EVENTBRITE_EXCEL_PATH = os.path.join(os.path.expanduser('~'), '3030DryRun1.xlsx')
+EVENTBRITE_EXCEL_PATH = os.path.join(os.path.expanduser('~'), '3030DryRun2.xlsx')
 
 def id_generator(size):
     import random
