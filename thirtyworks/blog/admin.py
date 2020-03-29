@@ -17,4 +17,7 @@ class PostAdmin(admin.ModelAdmin):
         # # for related fields
         # ('a_foreignkey_field', RelatedDropdownFilter),
     )
+
+    list_display = ['title', 'author', 'day', 'anything_else']
+
 admin.site.register(Post, PostAdmin)
