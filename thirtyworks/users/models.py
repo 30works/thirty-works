@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     blocked = models.BooleanField(default=False)
     insta_handler = models.CharField(max_length=100, blank=True, null=True)
     url = models.CharField(max_length=100, blank=True, null=True)
-
+    date_blocked = models.DateField(blank=True, null=True)
 
 
     def __str__(self):

@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import os
 import json
+from datetime import datetime
 
 
 with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
@@ -70,6 +71,7 @@ def complain():
                 user.user.is_active = False
                 user.user.save()
                 user.blocked = True
+                user.date_blocked = datetime.now()
                 user.save()
             else:
                 accepted_users.append(user.user.email)
