@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,10 +40,41 @@
 <!--              <a class="nav-item nav-link" href="/">Home</a>-->
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
 
+<!--                                  <h4 id="countdown"></h4>-->
+                <span class="navbar-text" id="countdown">
+<!--                <h2>Day: {{ day_number }}</h2>-->
+                  <script>
+var options = {
+    timeZone: 'Europe/London',
+//    year: 'numeric', month: 'numeric', day: 'numeric',
+//   hour: 'numeric', minute: 'numeric', second: 'numeric',
+};
+var day_n = {{ day_number }} + 1;
+var d = new Date();
+var n = d.getTimezoneOffset();
+var deadline = new Date("April ${day_n}, 2020 23:00:00").getTime() - n*60000;
+var x = setInterval(function() {
+var now = new Date().getTime();
+var t = deadline - now;
+var days = Math.floor(t / (1000 * 60 * 60 * 24));
+var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((t % (1000 * 60)) / 1000);
+document.getElementById("countdown").innerHTML = "Deadline: " + hours + " hours " + minutes + " minutes " + seconds + " seconds ";
+
+    if (t < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Deadline: EXPIRED";
+    }
+}, 1000);
+                   </script>
+
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="">Day</a>
+<!--                <a class="nav-item nav-link" href="">Day</a>-->
+                <span class="navbar-text" >Day</span>
+
               <select class="form_control" id="select" >
                 <option>1</option>
                 <option>2</option>
