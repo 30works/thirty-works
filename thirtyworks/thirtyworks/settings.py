@@ -73,7 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'blog.context_processors.GetDate'
+                'blog.context_processors.GetDate',
+                'blog.context_processors.get_latest_day_number'
             ],
         },
     },
