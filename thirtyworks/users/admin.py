@@ -11,7 +11,12 @@ from django.http import HttpResponse
 class UserProfileAdmin(admin.ModelAdmin):
     list_filter = ['blocked',         ('date_blocked', DropdownFilter),]
 
+    list_display = ['user', 'get_email']
+
     actions = ['export_as_csv']
+
+    def get_email(self, obj):
+        return obj.user.email
 
     def export_as_csv(self, request, queryset):
         meta = self.model._meta
