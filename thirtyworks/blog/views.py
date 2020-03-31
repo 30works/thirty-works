@@ -176,12 +176,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         day = Day.objects.last()
         form.instance.day = day
 
-        try:
-            email_from = settings.EMAIL_HOST_USER
-            send_mail("Thanks for submitting for day {}".format(day.number), "Your work has been received!", email_from, [self.request.user.email])
-        except SMTPResponseException as smtp_exception:
-            print('Problem sending confirmation email!!')
-            print(smtp_exception)
+        # try:
+        #     email_from = settings.EMAIL_HOST_USER
+        #     send_mail("Thanks for submitting for day {}".format(day.number), "Your work has been received!", email_from, [self.request.user.email])
+        # except SMTPResponseException as smtp_exception:
+        #     print('Problem sending confirmation email!!')
+        #     print(smtp_exception)
 
 
         return super().form_valid(form)
