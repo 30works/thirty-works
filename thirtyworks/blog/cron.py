@@ -107,19 +107,19 @@ def complain():
 
     # wait to send out emails
     time.sleep(3600)
-    
+
     # send email to rejected users
     for i, rejected_user in enumerate(rejected_users):
         if i > 0 and (i % 75) == 0:
             print('Sleeping...')
-            time.sleep(305)
+            time.sleep(600)
         email(rejected_subject, rejected_message, [rejected_user])
 
     # send email to active users
     for i, accepted_user in enumerate(accepted_users):
         if i > 0 and (i % 75) == 0:
             print('Sleeping...')
-            time.sleep(305)
+            time.sleep(600)
         email(accepted_subject, accepted_message, [accepted_user])
 
 # python manage.py installtasks
