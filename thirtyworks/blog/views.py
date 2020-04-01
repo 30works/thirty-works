@@ -138,8 +138,8 @@ class CreatePostForm(forms.ModelForm):
         # if Post.objects.filter(author=current_user, date_posted=timezone.now().today()).exists():
         print('timezone.now().date()='.format(timezone.now().date()))
         print('current_user={}'.format(current_user))
-        # print(Post.objects.filter(author=current_user, date_posted=timezone.now().date()))
-        if Post.objects.filter(author=current_user, day__date_posted__date=timezone.now().date()).exists():
+        print(Post.objects.filter(author=current_user, datetime_posted__date=timezone.now().date()))
+        if Post.objects.filter(author=current_user, datetime_posted__date=timezone.now().date()).exists():
             # messages.error(current_user, 'You already submitted something today!')
             print('User {} was forbidden from posting again today'.format(self.user))
             raise forms.ValidationError("You already submitted something today")
