@@ -20,4 +20,6 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'author', 'day', 'anything_else']
 
+    search_fields = ['title', 'author__username', 'author__email']
+
 admin.site.register(Post, PostAdmin)
