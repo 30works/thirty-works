@@ -7,6 +7,7 @@ from django.conf import settings
 import os
 import json
 from datetime import datetime
+import time
 
 
 with open(os.path.join(os.path.expanduser('~'), '30works.json'), 'r') as f:
@@ -104,12 +105,21 @@ def complain():
     # email(accepted_subject, accepted_message, accepted_users)
     # print("Email has been sent to active users.")
 
+    # wait to send out emails
+    time.sleep(3600)
+    
     # send email to rejected users
-    for rejected_user in rejected_users:
+    for i, rejected_user in enumerate(rejected_users):
+        if i > 0 and (i % 75) == 0:
+            print('Sleeping...')
+            time.sleep(305)
         email(rejected_subject, rejected_message, [rejected_user])
 
     # send email to active users
-    for accepted_user in accepted_users:
+    for i, accepted_user in enumerate(accepted_users):
+        if i > 0 and (i % 75) == 0:
+            print('Sleeping...')
+            time.sleep(305)
         email(accepted_subject, accepted_message, [accepted_user])
 
 # python manage.py installtasks
