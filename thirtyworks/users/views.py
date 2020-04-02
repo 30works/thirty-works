@@ -44,11 +44,11 @@ class MyUserUpdateForm(UserUpdateForm):
         username = self.data['username']
         if any(elem in username for elem in DISALLOWED_CHARS):
             print('Found a disallowed char!!!\n')
-            cleaned_username = copy.deepcopy(username)
-            # for char in DISALLOWED_CHARS:
-            #     cleaned_username = cleaned_username.replace(char, '')
-            # self.cleaned_data['username'] = cleaned_username
-            self.cleaned_data['username'] = original_username
+            cleaned_username = copy.deepcopy(original_username)
+            for char in DISALLOWED_CHARS:
+                cleaned_username = cleaned_username.replace(char, '')
+            self.cleaned_data['username'] = cleaned_username
+            # self.cleaned_data['username'] = original_username
             raise ValidationError("Invalid character in username")
         super().clean()
 
