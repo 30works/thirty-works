@@ -20,6 +20,9 @@ select{
           <div class="col-md-8">
         <div class="form-group">
             <label for="exampleFormControlInput1">Username (please avoid spaces and special characters):</label>
+            <div>
+            <small>Note: This is the name you log in with, and is displayed under all your works</small>
+            </div>
             <input type="text" class="form-control" name="username" value="{{ user.username|default:'' }}"  placeholder="Enter Username" maxlength="150" required>
           </div>
          
