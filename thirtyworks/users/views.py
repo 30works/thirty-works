@@ -34,19 +34,21 @@ def register(request):
 class MyUserUpdateForm(UserUpdateForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request') # get request from kwargs, but don't pass that kwarg to super
+        self.current_user = kwargs.get('instance')
         super().__init__(*args, **kwargs)
 
     def clean(self):
         print('HUNTING FOR DISALLAWED CHARS')
-        # current_user = self.user  # from init
+        original_username = self.current_user.username  # from init
         DISALLOWED_CHARS = r" /'!£$%^&*()+=~#:\\\""
         username = self.data['username']
         if any(elem in username for elem in DISALLOWED_CHARS):
             print('Found a disallowed char!!!\n')
             cleaned_username = copy.deepcopy(username)
-            for char in DISALLOWED_CHARS:
-                cleaned_username = cleaned_username.replace(char, '')
-            self.cleaned_data['username'] = cleaned_username
+            # for char in DISALLOWED_CHARS:
+            #     cleaned_username = cleaned_username.replace(char, '')
+            # self.cleaned_data['username'] = cleaned_username
+            self.cleaned_data['username'] = original_username
             raise ValidationError("Invalid character in username")
         super().clean()
 
