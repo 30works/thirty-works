@@ -30,14 +30,16 @@ label{
       <div class="form-group">
         <label for="exampleFormControlSelect1">Submission Format (*)</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option value="1">Webpage URL</option>
-          <option value="2">Upload JPEG / PNG</option>
-          <option value="3">Vimeo / Youtube / Soundcloud URL</option>
+            <option value="1">Upload JPEG / PNG</option>
+            <option value="2">Vimeo / Youtube / Soundcloud URL</option>
+            <option value="3">Webpage URL</option>
         </select>
       </div>
          <div class="form-group" id="form">
-          <label for="pwd">Webpage URL (*)</label>
-          <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />
+<!--          <label for="pwd">Webpage URL (*)</label>-->
+<!--          <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />-->
+         <label for="exampleFormControlFile1">Post Pic:</label>
+        <input type="file" class="form-control-file" name="postpic" accept="image/*"  id="id_postpic" required>
          </div>
          <div class="form-group">
           <label for="exampleFormControlTextarea1">Visual description for screen-readers (Max 250 characters) (*)</label>
@@ -49,11 +51,11 @@ label{
         </div>
         <div class="custom-control custom-checkbox mr-sm-2">
           <input type="checkbox" class="custom-control-input" name="is_private" id="customControlAutosizing">
-          <label class="custom-control-label" for="customControlAutosizing">Tick this box if you don’t want this work to be made public.</label>
+            <label class="custom-control-label" for="customControlAutosizing">Tick this box if you <u>DO NOT</u> want this work to be made public.</label>
         </div>
       <br>
       <div class="text-center">
-      <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;" id="submitbutton1">Submit</button>
+      <button type="submit" class="btn btn-primary btn-lg  " style="background-color: #343a40!important;border-color:#343a40!important ;" id="submitbutton1">Click Here To Submit</button>
     </div>
     </form>
   </div>
@@ -69,7 +71,7 @@ label{
                 {{ form.as_p }}
             </fieldset>
             <div class="form-group">
-                <button class="'btn btn-outline-info" type="submit" id="submitbutton2">Submit</button>
+                <button class="'btn btn-outline-info" type="submit" id="submitbutton2">Click Here To Submit</button>
             </div>
         </form>
     </div>
@@ -83,11 +85,11 @@ label{
      document.getElementById("date").innerText = localStorage.getItem("date_value");
      $('select').on('change', function() {
        console.log(this.value)
-  if(this.value === "1"){
+  if(this.value === "3"){
     $("#form").html(` <label for="pwd">Webpage URL:</label>
     <input class="form-control" name="url"  placeholder="Enter Url" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url" required />`)
   }
-  else if(this.value === "2" ){
+  else if(this.value === "1" ){
     $("#form").html(`        <label for="exampleFormControlFile1">Post Pic:</label>
         <input type="file" class="form-control-file" name="postpic" accept="image/*"  id="id_postpic" required>
 `)
