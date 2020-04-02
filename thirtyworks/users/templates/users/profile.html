@@ -19,7 +19,7 @@ select{
         <div class="row">
           <div class="col-md-8">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Username:</label>
+            <label for="exampleFormControlInput1">Username (please avoid spaces and special characters):</label>
             <input type="text" class="form-control" name="username" value="{{ user.username|default:'' }}"  placeholder="Enter Username" maxlength="150" required>
           </div>
          
@@ -38,14 +38,14 @@ select{
             <input type="text" class="form-control" name="url" value="{{ user.userprofile.url|default:'' }}" pattern='^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' title="Invalid Url"  placeholder="Enter website">
           </div>
 
-          <div class="form-group">
-            <label for="exampleFormControlFile1">Profile Pic(Currently):</label>
-            <a href="{{user.userprofile.profilepic.url|default:''}}" id='img' data-name="{{user.userprofile.profilepic.url}}"></a>
-        </div>
-          <div class="form-group">
-            <label for="exampleFormControlFile1">Change:</label>
-            <input type="file" class="form-control-file" name="profilepic" accept="image/*" >
-          </div>
+<!--          <div class="form-group">-->
+<!--            <label for="exampleFormControlFile1">Profile Pic(Currently):</label>-->
+<!--            <a href="{{user.userprofile.profilepic.url|default:''}}" id='img' data-name="{{user.userprofile.profilepic.url}}"></a>-->
+<!--        </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="exampleFormControlFile1">Change:</label>-->
+<!--            <input type="file" class="form-control-file" name="profilepic" accept="image/*" >-->
+<!--          </div>-->
         </div>
         <div class="col-md-4 text-center">
           

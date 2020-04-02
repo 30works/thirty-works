@@ -15,7 +15,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     actions = ['export_as_csv']
 
-    search_fields = ['user__username']
+    search_fields = ['user__username', 'user__email']
 
     def get_email(self, obj):
         return obj.user.email
