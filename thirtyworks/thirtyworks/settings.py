@@ -167,3 +167,8 @@ EMAIL_HOST_PASSWORD = config_json["EMAIL_HOST_PASSWORD"]
 
 # 30 works logic stuff
 NUM_DAYS = 30
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
