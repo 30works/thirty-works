@@ -106,22 +106,22 @@ def complain():
     # print("Email has been sent to active users.")
 
     # wait to send out emails
-    # print('Sleeping...')
-    # time.sleep(300)
+    print('Sleeping...')
+    time.sleep(300)
 
     # send email to rejected users
-    # for i, rejected_user in enumerate(rejected_users):
-    #     if i > 0 and (i % 50) == 0:
-    #         print('Sleeping...')
-    #         time.sleep(600)
-    #     email(rejected_subject, rejected_message, [rejected_user])
-    #
-    # # send email to active users
-    # for i, accepted_user in enumerate(accepted_users):
-    #     if i > 0 and (i % 50) == 0:
-    #         print('Sleeping...')
-    #         time.sleep(600)
-    #     email(accepted_subject, accepted_message, [accepted_user])
+    for i, rejected_user in enumerate(rejected_users):
+        if i > 0 and (i % 50) == 0:
+            print('Sleeping...')
+            time.sleep(720)
+        email(rejected_subject, rejected_message, [rejected_user])
+
+    # send email to active users
+    for i, accepted_user in enumerate(accepted_users):
+        if i > 0 and (i % 50) == 0:
+            print('Sleeping...')
+            time.sleep(720)
+        email(accepted_subject, accepted_message, [accepted_user])
 
 # python manage.py installtasks
 # python manage.py showtasks
