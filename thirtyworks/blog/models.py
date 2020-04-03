@@ -79,5 +79,7 @@ class Post(models.Model):
 
 
     def clean(self):
-        if not self.postpic or self.url or self.postvideo:
+        if (not self.postpic) and (not self.url) and (not self.postvideo):
+        # if not self.postpic or self.url or self.postvideo:
             raise ValidationError("You must specify an image to upload, a webpage URL, or a soundcloud/youtube/vimeo link")
+        super().clean()
