@@ -134,6 +134,8 @@ class CreatePostForm(forms.ModelForm):
         exclude = ('day',)
 
     def clean(self):
+
+        # check that user has not already submitted today
         current_user = self.user  # from init
         # if Post.objects.filter(author=current_user, date_posted=timezone.now().today()).exists():
         print('timezone.now().date()='.format(timezone.now().date()))

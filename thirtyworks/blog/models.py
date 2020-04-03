@@ -5,6 +5,8 @@ from django.urls import reverse
 from embed_video.fields import EmbedVideoField
 import copy
 from PIL import Image
+from django.core.exceptions import ValidationError
+
 
 
 def resize_to_maxsize(max_size, pil_image):
@@ -74,3 +76,8 @@ class Post(models.Model):
 
             # save the image file
             im.save(self.postpic.path)
+
+
+    def clean(self):
+        if not self.postpic or self.url or self.postvideo:
+            raise ValidationError("You must specify an image to upload, a webpage URL, or a soundcloud/youtube/vimeo link")
