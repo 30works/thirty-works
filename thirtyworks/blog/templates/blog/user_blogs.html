@@ -157,6 +157,8 @@ img{
 
               {% if post.url|slice:":4" == 'http' %}
               <h2> <a href="{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
+              {% elif post.url|slice:":3" == 'www' %}
+              <h2> <a href="http://{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
            {% else %}
            <h2> <a href="//{{ post.url }}"  target="_blank"> {{ post.url }} </a></h2>
            {% endif %}            
@@ -174,6 +176,8 @@ img{
               {% if users.url|slice:":4" == 'http' %}
 
 <h4> <a href="{{users.url}}" target="_blank">{{users.url}}</a></h4>
+{% elif  users.url|slice:":3" == 'www'%}
+<h4> <a href="http://{{ users.url }}"  target="_blank">{{ users.url }}</a></h4>
 {% else %}
 <h4> <a href="//{{users.url}}" target="_blank">{{users.url}}</a></h4>
 
