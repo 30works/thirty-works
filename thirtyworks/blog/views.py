@@ -196,6 +196,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         latest_day = Day.objects.last()
         context['day'] = config_json[str(latest_day.number)]
+        context['latest_day'] = latest_day.number
         return context
 
 
